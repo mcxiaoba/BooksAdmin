@@ -28,6 +28,7 @@ logging:
   level:
     org.springframework.security: DEBUG
 
+
 base23:
   login:
     jwt:
