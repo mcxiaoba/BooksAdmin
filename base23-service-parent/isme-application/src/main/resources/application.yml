@@ -1,0 +1,54 @@
+server:
+  port: 8085
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+    serialization.write_dates_as_timestamps: false
+  profiles:
+#    active: h2
+    active: mysql
+  cache:
+#    type: caffeine
+    type: redis
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      idle-timeout: 30000
+      maximum-pool-size: 50
+      connection-timeout: 60000
+  # 使用liquibase框架，在项目启动时全自动管理自动建表、改表、插入数据等操n
+  liquibase:
+    enabled: true
+
+# SpringSecurity日志级别降低，方便开发时观察。生产环境需要关闭
+logging:
+  level:
+    org.springframework.security: DEBUG
+
+base23:
+  login:
+    jwt:
+      private-key: ""
+      public-Key: ""
+
+mybatis-plus:
+  configuration:
+    # 开启打印sql配置，生产环境请关闭
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations:
+    - "classpath:mapper/**/*.xml"
+  type-aliases-package: org.base23.web.Model.Entity
+
+# 微服务健康监控
+management:
+  endpoints:
+    web:
+      exposure:
+        # 可暴露的endpoints请看官方文档：https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html#actuator.endpoints.exposing
+        # "*" 这个会暴露所有内容.
+        include: "health,info"
+      base-path: /actuator
+

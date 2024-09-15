@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.base23.web.Mapper.WmsBorrowedBooksMapper">
+
+    <select id="listToVoList" resultType="org.base23.web.Model.Vo.WmsBorrowedBooksVo">
+        SELECT * from wms_borrowed_books
+    </select>
+
+
+</mapper>
